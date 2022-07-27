@@ -9,17 +9,20 @@ import FileBase from 'react-file-base64';
 
 import { signUp, signIn } from '../../actions/auth';
 
-const initial = {firstName:'', lastName:'', email:'', password:'', confirmPassword:'', profilePic:''};
+const initial = {firstname:'', lastname:'', email:'', password:'', profile_pic:''};
 
 const Auth = () => {
 
     const classes = useStyles();
     const user = useSelector((state) => state.auth );
     const [showPassword, setShowPassword] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
     const [formData, setFormData] = useState(initial);
+    const [passwordError, setPasswordError] = useState(false);
     const dispatch = useDispatch();
     const history = useNavigate();
+
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -27,9 +30,9 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            if(isSignUp){
+            if(isSignUp && formData.password === confirmPassword){
                 dispatch(signUp(formData,history));
-            }else{
+            }else if(!isSignUp){
                 dispatch(signIn(formData,history));
             }
         } catch (error) {
@@ -38,7 +41,16 @@ const Auth = () => {
     };
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]:e.target.value});
+        if(e.target.name==='confirmPassword') {
+            setConfirmPassword(e.target.value);
+            if( formData.password === e.target.value){
+                setPasswordError(false);
+            }else{
+                setPasswordError(true);
+            }
+        }else{
+            setFormData({...formData, [e.target.name]:e.target.value});
+        }
         console.log(formData);
     }
 
@@ -53,8 +65,8 @@ const Auth = () => {
                         {
                             isSignUp && (
                                 <>
-                                        <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half></Input>
-                                        <Input name="lastName" label="Last Name" handleChange={handleChange} half ></Input>
+                                        <Input name="firstname" label="First Name" handleChange={handleChange} autoFocus half></Input>
+                                        <Input name="lastname" label="Last Name" handleChange={handleChange} half ></Input>
                                 </>
 
                             )
@@ -64,13 +76,13 @@ const Auth = () => {
 
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
 
-                        {isSignUp && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" />}
+                        {isSignUp && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" passwordError={passwordError} />}
                         {isSignUp && 
                             <div className={classes.fileBase}>
                                 <FileBase 
                                     type = 'file'
                                     multiple ={false}
-                                    onDone={({base64}) => setFormData({...formData,profilePic:base64})}
+                                    onDone={({base64}) => setFormData({...formData,profile_pic:base64})}
                                 />
                             </div>
                         }

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Menu, MenuItem, Tooltip, IconButton } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 import useStyles from './style';
 import Search from './Search';
@@ -8,9 +9,9 @@ const Navbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const user = useSelector((state)=> state.user);
 
     const classes = useStyles();
-    const user = 'praf';
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -26,7 +27,7 @@ const Navbar = () => {
                 <Typography variant='h4' align='center' >TaggadaGram</Typography>
             </div>
             <Toolbar className={classes.toolbar}>
-                { user && (<>
+                { !user && (<>
                     <Search />
                     <Tooltip title='Profile'> 
                         <IconButton 

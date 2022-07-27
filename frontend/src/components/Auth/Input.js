@@ -5,12 +5,14 @@ import VisibilityOff from '@material-ui/icons/Visibility';
 
 
 
-const Input = ({ name, handleChange, label, half, autoFocus, type, handleShowPassword }) => {
+const Input = ({ name, handleChange, label, half, autoFocus, type, handleShowPassword, passwordError }) => {
     return (
         <Grid item xs={12} sm={half ? 6 : 12}>
             <TextField
+                error = {passwordError}
                 name={name}
                 onChange={handleChange}
+                helperText = {passwordError ? 'Passwords do not match' : ''}
                 variant="outlined"
                 required
                 label={label}
