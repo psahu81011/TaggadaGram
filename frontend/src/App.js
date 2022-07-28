@@ -1,9 +1,11 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Auth from './components/Auth/Auth.js';
+import SignIn from './components/Auth/SignIn.js';
 import { Container } from '@material-ui/core';
 import Navbar from './components/Navbar/Navbar';
 import Posts from './components/Posts/Posts';
+import UserList from './components/UserList/UserList.js';
+import SignUp from './components/Auth/SignUp.js';
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <Navbar />
       <Routes>
         <Route path='/' exact element={<Posts />} />
-        <Route path='/login' element={<Auth/>} />
+        <Route path='/login' element={<SignIn/>} />
+        <Route path='/register' element={<SignUp/>} />
       </Routes>
       </Container>
     </BrowserRouter>

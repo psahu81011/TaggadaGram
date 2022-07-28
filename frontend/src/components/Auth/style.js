@@ -37,5 +37,5 @@ export default makeStyles((theme) => ({
     fileBase: {
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(1),        
-    }
+    },
 }));

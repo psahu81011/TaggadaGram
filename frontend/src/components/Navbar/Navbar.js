@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Menu, MenuItem, Tooltip, IconButton } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+
 
 import useStyles from './style';
 import Search from './Search';
@@ -9,9 +10,14 @@ const Navbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const user = useSelector((state)=> state.user);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const location = useLocation();
 
     const classes = useStyles();
+
+    const handleLogout = () => {
+
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -20,6 +26,10 @@ const Navbar = () => {
         setAnchorEl(e.currentTarget);
     }
 
+    useEffect(()=>{
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    },[location]);
+
   return (
         <AppBar position='static' className={classes.appBar} elevation={0} >
             <div className={classes.brandContainer}>
@@ -27,7 +37,7 @@ const Navbar = () => {
                 <Typography variant='h4' align='center' >TaggadaGram</Typography>
             </div>
             <Toolbar className={classes.toolbar}>
-                { !user && (<>
+                { user && (<>
                     <Search />
                     <Tooltip title='Profile'> 
                         <IconButton 
@@ -38,7 +48,7 @@ const Navbar = () => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar alt={user} ></Avatar>
+                            <Avatar alt={user?.firstname} src={user?.profile_pic} >{user?.firstname?.charAt(0)?.toUpperCase()}</Avatar>
 
                         </IconButton>
                     </Tooltip>
@@ -52,8 +62,8 @@ const Navbar = () => {
                             anchorOrigin = {{horizontal: 'left', vertical: 'bottom'}}
                             getContentAnchorEl={null}
                         >
-                            <MenuItem>Profile</MenuItem>
-                            <MenuItem>Logout</MenuItem>
+                            <MenuItem >Profile</MenuItem>
+                            <MenuItem onClick={handleLogout} >Logout</MenuItem>
                         </Menu>
                     </>
                 )}
