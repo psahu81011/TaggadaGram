@@ -1,7 +1,8 @@
-import { Grid } from '@material-ui/core';
+import { Divider, Grid } from '@material-ui/core';
 import React from 'react';
 import Comments from './Comments/Comments';
 import Post from './Post/Post';
+import PostForm from './PostForm/PostForm';
 
 const Posts = () => {
   return (
@@ -16,9 +17,13 @@ const Posts = () => {
           </Grid>
           <Grid item xs={1} />
 
-        </Grid>
       </Grid>
-      <Grid item xs={12} sm={3}>Form</Grid>
+      <br />
+        <Divider/>
+        </Grid>
+      <Grid item xs={12} sm={3}>
+        <PostForm/>
+      </Grid>
       <Grid item xs={12} sm={1}/>
     </Grid>
   )

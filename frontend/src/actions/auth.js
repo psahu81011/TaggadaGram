@@ -3,8 +3,7 @@ import { LOGIN, REGISTER } from '../constants/actionTypes';
 
 export const signIn = (formData, history) => async (dispatch) => {
     try {
-        const { data } = await api.signIn(formData);
-        console.log(formData);
+        const res = await api.signIn(formData);
 
         dispatch({ type: LOGIN, payload: data });
 
@@ -21,7 +20,7 @@ export const signUp = (formData, history) => async (dispatch) => {
 
         dispatch({ type: REGISTER, payload:data});
          
-        history.push('/');
+        history.push('/login');
     } catch (error) {
         console.log(error);
     }
