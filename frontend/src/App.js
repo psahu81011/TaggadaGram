@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Posts from "./components/Posts/Posts";
 import UserList from "./components/UserList/UserList.js";
 import SignUp from "./components/Auth/SignUp.js";
+import Profile from "./components/Profile/Profile.js";
 
 function App() {
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -27,6 +28,7 @@ function App() {
                         }
                     />
                     <Route path="/feed/:id" element={<Posts />} />
+                    <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/login" element={<SignIn />} />
                     <Route path="/register" element={<SignUp />} />
                 </Routes>

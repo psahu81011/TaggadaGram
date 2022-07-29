@@ -2,8 +2,9 @@ import * as api from "../api/index";
 import {
     CREATE,
     CREATE_COMMENTS,
-    FETCH,
+    FETCH_FEED,
     FETCH_COMMENTS,
+    FETCH_POST,
 } from "../constants/actionTypes";
 
 export const createPost = (post) => async (dispatch) => {
@@ -28,7 +29,17 @@ export const getFeed = (id) => async (dispatch) => {
     try {
         const { data } = await api.getFeed(id);
 
-        dispatch({ type: FETCH, payload: data });
+        dispatch({ type: FETCH_FEED, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getMyPost = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.getMyPost(id);
+
+        dispatch({ type: FETCH_POST, payload: data });
     } catch (error) {
         console.log(error);
     }

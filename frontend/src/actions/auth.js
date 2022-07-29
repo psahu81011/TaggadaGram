@@ -1,5 +1,5 @@
 import * as api from "../api/index";
-import { LOGIN, REGISTER } from "../constants/actionTypes";
+import { LOGIN, LOGOUT, REGISTER } from "../constants/actionTypes";
 
 export const signIn = (formData) => async (dispatch) => {
     try {
@@ -27,6 +27,15 @@ export const signUp = (formData) => async (dispatch) => {
         } else {
             dispatch({ type: REGISTER, payload: { status: false } });
         }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const signOut = () => async (dispatch) => {
+    try {
+        await api.signOut();
+        dispatch({ type: LOGOUT });
     } catch (error) {
         console.log(error);
     }

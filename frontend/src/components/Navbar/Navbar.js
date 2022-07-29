@@ -9,10 +9,12 @@ import {
     Tooltip,
     IconButton,
 } from "@material-ui/core";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 import useStyles from "./style";
 import Search from "./Search";
+import { signOut } from "../../actions/auth";
 
 const Navbar = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -21,11 +23,16 @@ const Navbar = () => {
         JSON.parse(localStorage.getItem("profile"))
     );
     const location = useLocation();
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const classes = useStyles();
 
     const handleLogout = () => {
+        dispatch(signOut());
+
         localStorage.removeItem("profile");
+
+        navigate("/");
     };
 
     const handleClose = () => {

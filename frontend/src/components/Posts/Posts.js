@@ -20,13 +20,13 @@ const Posts = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={1} />
-            {posts.map((post, index) => {
+            {posts.map((post, index) => (
                 <Grid item xs={12} sm={7} key={index}>
                     <Post post={post} />
                     <br />
                     <Divider />
-                </Grid>;
-            })}
+                </Grid>
+            ))}
             <Grid item xs={12} sm={3}>
                 <PostForm />
             </Grid>

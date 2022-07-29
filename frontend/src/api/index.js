@@ -19,9 +19,11 @@ API.interceptors.request.use(
 
 export const signUp = (formData) => API.post("register", formData);
 export const signIn = (formData) => API.post("login", formData);
+export const signOut = () => API.post("/userlogout");
 
 export const createPost = (post) => API.post("addpost", post);
-export const likePost = (data) => API.post("likepost", data); //userid, postid
+export const likePost = (data) => API.post("likepost", data);
 export const getFeed = (id) => API.get(`/getnewsfeed/${id}`);
+export const getMyPost = (id) => API.get(`/myposts/${id}`);
 export const getComments = (postId) => API.get(`/getcomments/${postId}`);
 export const insertComment = (comment) => API.post("/insertcomment", comment);

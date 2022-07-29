@@ -22,6 +22,7 @@ const initial = {
     email: "",
     password: "",
     profile_pic: "",
+    id: "",
 };
 
 const SignUp = () => {
@@ -119,6 +120,12 @@ const SignUp = () => {
                             half
                         ></Input>
 
+                        <Input
+                            name="id"
+                            label="Username"
+                            handleChange={handleChange}
+                            type="text"
+                        />
                         <Input
                             name="email"
                             label="Email Address"

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { insertComment } from "../../../actions/post";
 import Comment from "./Comment";
 
-const initial = { postId: "", comment: { userId: "", content: "" } };
+const initial = { postId: "", userId: "", content: "" };
 
 const Comments = (postId) => {
     const [commentText, setCommentText] = useState("");
@@ -20,11 +20,11 @@ const Comments = (postId) => {
         setCommentData({ ...commentData, postId: postId });
         setCommentData({
             ...commentData,
-            comment: { ...comment, userId: user.id },
+            userId: user.id,
         });
         setCommentData({
             ...commentData,
-            comment: { ...comment, content: commentText },
+            content: commentText,
         });
 
         dispatch(insertComment(commentData));
@@ -37,7 +37,7 @@ const Comments = (postId) => {
             <Grid component="form" onSubmit={handleSubmit} item xs={12}>
                 <TextField
                     onChange={(e) => setCommentText(e.target.value)}
-                    value={comment}
+                    value={commentText}
                     placeholder="Taggade Vichar"
                 />
                 <Button type="submit">Comment</Button>
