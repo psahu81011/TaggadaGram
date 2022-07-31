@@ -42,10 +42,6 @@ const Navbar = () => {
         setAnchorEl(e.currentTarget);
     };
 
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("profile")));
-    }, [location]);
-
     return (
         <AppBar position="static" className={classes.appBar} elevation={0}>
             <div className={classes.brandContainer}>
@@ -57,7 +53,7 @@ const Navbar = () => {
             <Toolbar className={classes.toolbar}>
                 {user && (
                     <>
-                        <Search />
+                        {/* <Search /> */}
                         <Tooltip title="Profile">
                             <IconButton
                                 onClick={handleClick}
@@ -90,7 +86,11 @@ const Navbar = () => {
                             }}
                             getContentAnchorEl={null}
                         >
-                            <MenuItem>Profile</MenuItem>
+                            {/* <MenuItem
+                                onClick={navigate(`/profile/${user?.id}`)}
+                            >
+                                Profile
+                            </MenuItem> */}
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
                     </>

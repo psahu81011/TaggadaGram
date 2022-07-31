@@ -31,7 +31,7 @@ const Profile = () => {
         dispatch(getMyPost(username));
 
         console.log(username);
-    }, [location]);
+    }, []);
 
     return (
         <>
