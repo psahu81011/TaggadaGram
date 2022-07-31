@@ -6,7 +6,7 @@ API.interceptors.request.use(
     (req) => {
         if (localStorage.getItem("profile")) {
             req.headers.token = `Bearer ${
-                JSON.parse(localStorage.getItem("profile")).randomString
+                JSON.parse(localStorage.getItem("profile")).token
             } ${JSON.parse(localStorage.getItem("profile")).id}`; ///might throw error in backend
         }
         return req;
@@ -19,7 +19,7 @@ API.interceptors.request.use(
 
 export const signUp = (formData) => API.post("register", formData);
 export const signIn = (formData) => API.post("login", formData);
-export const signOut = () => API.post("/userlogout");
+export const signOut = (user) => API.post("/userlogout", user);
 
 export const createPost = (post) => API.post("addpost", post);
 export const likePost = (data) => API.post("likepost", data);

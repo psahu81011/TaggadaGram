@@ -39,9 +39,9 @@ export const signUp = (formData) => async (dispatch) => {
     }
 };
 
-export const signOut = () => async (dispatch) => {
+export const signOut = (user) => async (dispatch) => {
     try {
-        await api.signOut();
+        await api.signOut(user);
         dispatch({ type: LOGOUT });
     } catch (error) {
         console.log(error);

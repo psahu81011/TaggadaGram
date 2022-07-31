@@ -7,21 +7,27 @@ import { Grid } from "@material-ui/core";
 import useStyles from "./style";
 import { createPost } from "../../../actions/post";
 
-const initial = { content: "", image: "", created_at: "", userId: "" };
-
 const PostForm = () => {
     const classes = useStyles();
 
-    const [post, setPost] = useState(initial);
     const dispatch = useDispatch();
     const history = useNavigate();
     const user = JSON.parse(localStorage.getItem("profile"));
 
+    const ts = new Date();
+    const initial = {
+        content: "",
+        image: "",
+        created_at: ts.toJSON(),
+        userId: user?.id,
+    };
+    const [post, setPost] = useState(initial);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         try {
-            const ts = new Date();
-            setPost({ ...post, created_at: ts.toJSON(), userId: user?.id });
+            console.log(user);
+
             dispatch(createPost(post));
 
             history("/");

@@ -28,7 +28,7 @@ const Navbar = () => {
     const classes = useStyles();
 
     const handleLogout = () => {
-        dispatch(signOut());
+        dispatch(signOut(user));
 
         localStorage.removeItem("profile");
 

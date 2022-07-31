@@ -9,6 +9,7 @@ import {
 
 export const createPost = (post) => async (dispatch) => {
     try {
+        console.log(post);
         const { data } = await api.createPost(post);
 
         dispatch({ type: CREATE, payload: data });
@@ -27,6 +28,7 @@ export const likePost = (data) => async (dispatch) => {
 
 export const getFeed = (id) => async (dispatch) => {
     try {
+        console.log(id);
         const { data } = await api.getFeed(id);
 
         dispatch({ type: FETCH_FEED, payload: data });
