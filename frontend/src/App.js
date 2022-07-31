@@ -8,25 +8,12 @@ import SignUp from "./components/Auth/SignUp.js";
 import Profile from "./components/Profile/Profile.js";
 
 function App() {
-    const user = JSON.parse(localStorage.getItem("profile"));
-    console.log(user);
-
     return (
         <BrowserRouter>
             <Container maxWidth="md">
                 <Navbar />
                 <Routes>
-                    <Route
-                        path="/"
-                        exact
-                        element={
-                            user ? (
-                                <Navigate to={`/feed/${user.id}`} />
-                            ) : (
-                                <Navigate to="/login" />
-                            )
-                        }
-                    />
+                    <Route path="/" exact element={<Navigate to="/login" />} />
                     <Route path="/feed/:id" element={<Posts />} />
                     <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/login" element={<SignIn />} />

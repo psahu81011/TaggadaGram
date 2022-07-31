@@ -10,7 +10,7 @@ import {
 import Input from "./Input";
 import useStyles from "./style";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { signIn } from "../../actions/auth";
@@ -19,12 +19,14 @@ const initial = { email: "", password: "" };
 
 const SignIn = () => {
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem("profile"));
     const data = useSelector((state) => state.signin);
     const [signInDone, setSignInDone] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState(initial);
     const dispatch = useDispatch();
     const history = useNavigate();
+    const location = useLocation();
 
     const handleShowPassword = () =>
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -45,7 +47,9 @@ const SignIn = () => {
         console.log(formData);
     };
 
-    useEffect(() => {}, [data]);
+    useEffect(() => {
+        if (user) history(`/feed/${user?.id}`);
+    }, [data, location]);
 
     if (signInDone) {
         if (!data.status) {
@@ -65,9 +69,6 @@ const SignIn = () => {
                     </Typography>
                 </Paper>
             );
-        } else {
-            localStorage.setItem("profile", JSON.stringify(data.user));
-            history("/");
         }
     }
 
